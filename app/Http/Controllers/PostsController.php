@@ -16,7 +16,9 @@ class PostsController extends Controller
 
     public function show($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::with('comments')->findOrFail($id); //find ce biti lazyloading sa with je egr
+                                                    //prvo pisemo with nadji mi post sa komentarima a find nadji mi samo post
+        //dd($post); //pre returna moramo
 
         return view('posts.show', ['post' => $post]);
     }
