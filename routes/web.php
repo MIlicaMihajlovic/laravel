@@ -21,7 +21,7 @@ Route::prefix('posts')->group(function (){   //grupna funkcija kako ne bismo sta
 
     Route::get('/', 'PostsController@index');
     
-    
+    Route::post('/{id}/comments', 'CommentsController@store'); //za kreiranje komentara
     
 });
 

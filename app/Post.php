@@ -13,6 +13,13 @@ class Post extends Model
         'title', 'body', 'published'
     ];
 
+    const VALIDATION_RULES =
+    [
+        'title' => 'required',    //validacija na bekendu
+        'body' => 'required | min:25', // prava crta | nam pomaze da dodamo jos neki uslov
+        'published' => 'required'
+    ];
+
     public static function getPublishedPosts()
     {
         return Post::where('published', true)->get(); //hocemo da vratimo samo one postove koji su publishovani

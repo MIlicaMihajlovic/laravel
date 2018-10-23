@@ -33,11 +33,7 @@ class PostsController extends Controller
 
         $this->validate(  //validacija podtaka prima dva parametra request i asoc niz
             request(),      //prekidamo odmah da ne stigne do baze
-            [
-                'title' => 'required',    //validacija na bekendu
-                'body' => 'required | min:25', // prava crta | nam pomaze da dodamo jos neki uslov
-                'published' => 'required'
-            ]
+            Post::VALIDATION_RULES
         );
 
         Post::create(request()->all());
