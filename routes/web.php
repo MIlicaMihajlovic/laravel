@@ -1,0 +1,27 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+Route::get('/', 'PostsController@index');
+
+Route::prefix('posts')->group(function (){   //grupna funkcija kako ne bismo stalno pisali posts i skratili
+    
+    Route::get('/create', 'PostsController@create'); //za kreiranje postova i to mora prvo jer ako je id onda i create prepoznaje kao id
+    Route::post('/', 'PostsController@store');
+    
+    Route::get('/{id}', 'PostsController@show'); //bitan je redosled 
+
+    Route::get('/', 'PostsController@index');
+    
+    
+    
+});
+
