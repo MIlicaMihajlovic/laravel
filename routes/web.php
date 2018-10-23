@@ -20,8 +20,17 @@ Route::prefix('posts')->group(function (){   //grupna funkcija kako ne bismo sta
     Route::get('/{id}', 'PostsController@show'); //bitan je redosled 
 
     Route::get('/', 'PostsController@index');
+
     
-    Route::post('/{id}/comments', 'CommentsController@store'); //za kreiranje komentara
+    
+    
+    Route::prefix('/{postId}/comments')->group(function(){
+
+        Route::post('/', 'CommentsController@store'); //za kreiranje komentara
+        Route::post('/{commentId}', 'CommentsController@destroy');
+    });
+    
+    
     
 });
 

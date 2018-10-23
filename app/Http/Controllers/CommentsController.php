@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
-    public function store($id)
+    public function store($postId)
     {
-        $post = Post::findOrFail($id); //ako ne nadje post da izbaci gresku
+        $post = Post::findOrFail($postId); //ako ne nadje post da izbaci gresku
             
         //validacija pre kreiranja komentara
         
@@ -23,6 +23,17 @@ class CommentsController extends Controller
             request()->all()
         ); 
 
-        return redirect("/posts/{$id}"); //moraju biti dvostruki navodnici
+        return redirect("/posts/{$postId}"); //moraju biti dvostruki navodnici
+    }
+
+
+    public function destroy($postId, $commentId)
+    {
+        $comment = Comment::findOrFail($commentId); //nadji
+        $comment->delete(); //brisanje iz baze 
+
+        return redirect("/posts/{$postId}"); //vrati na stranicu tog posta
+
+        //dd(compact(['postId', 'commentId']));
     }
 }
