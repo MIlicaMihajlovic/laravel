@@ -18,8 +18,15 @@ class RegisterController extends Controller
         request(),      
         User::VALIDATION_RULES
     );
+
+
+    $user = new User();
+    $user->name = request('name');
+    $user->email = request('email');
+    $user->password = bcrypt(request('password'));
+    $user->save(); // da bi sacuvali usera u bazi
     
-        $user = User::create(request()->all());
+        //$user = User::create(request()->all());
         auth()->login($user); //ova linija ce nas ulogovati u aplikaciju i tu ne mozemo niz jer niz ne moze da se autentikuje
 
         return redirect('/posts');
