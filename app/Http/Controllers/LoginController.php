@@ -6,6 +6,25 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+   
+    public function index()
+    {
+        return view('login.index');
+    }
+
+    public function login()                                  //request 
+    {
+        if(!auth()->attempt(request(['email', 'password']))) { //za autentifikaciju usera email i password su po difoltu u bazi
+
+           return back()->withErrors([
+                'message' => 'You shall not pass.'
+           ]); 
+        }
+        return redirect('/posts');
+        
+    }
+   
+   
     public function logout()
     {
         auth()->logout(); //ovo ce nam izlogovati userea
@@ -13,10 +32,5 @@ class LoginController extends Controller
         return redirect('/posts');
     }
 
-    // public function login()
-    // {
-    //     auth()->login();
-
-    //     return redirect('/posts');
-    // }
+    
 }
