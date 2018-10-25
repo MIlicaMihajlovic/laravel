@@ -10,7 +10,7 @@
           <a href="/logout">Logout</a>     
       @else
           <a href="/login">Login</a>
-          <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+          <a class="btn btn-sm btn-outline-secondary" href="/register">Sign up</a>
       @endif
 <!-- u zavisnosti da li je ulogovan pokazivace log in ili log out -->
 

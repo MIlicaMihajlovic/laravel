@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    public function __construct()                             
+    {                                                       //proverava da li je korisnik gost
+        $this->middleware('guest', ['except' => 'logout']); //na metodu logout ne treba primeniti middleware
+    }
    
     public function index()
     {

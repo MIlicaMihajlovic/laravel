@@ -14,7 +14,7 @@ Route::get('/', 'PostsController@index');
 Route::get('/logout', 'LoginController@logout');
 
 Route::prefix('/login')->group(function(){
-    Route::get('/', 'LoginController@index');
+    Route::get('/', 'LoginController@index')->name('login');
     Route::post('/', 'LoginController@login');
 });
 
@@ -27,7 +27,7 @@ Route::prefix('/register')->group(function()
 });
 
 
-Route::prefix('posts')->group(function (){   //grupna funkcija kako ne bismo stalno pisali posts i skratili
+Route::group(['prefix' => 'posts', 'middleware' => ['auth']], function (){   //grupna funkcija kako ne bismo stalno pisali posts i skratili
     
     Route::get('/create', 'PostsController@create'); //za kreiranje postova i to mora prvo jer ako je id onda i create prepoznaje kao id
     Route::post('/', 'PostsController@store');
