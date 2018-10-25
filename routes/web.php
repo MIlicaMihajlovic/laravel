@@ -12,6 +12,13 @@
 */
 Route::get('/', 'PostsController@index');
 
+Route::prefix('/register')->group(function()
+{
+    Route::get('/', 'RegisterController@create'); //za forme do registracije
+    Route::post('/', 'RegisterController@store'); //za osposobljavanje registracije
+});
+
+
 Route::prefix('posts')->group(function (){   //grupna funkcija kako ne bismo stalno pisali posts i skratili
     
     Route::get('/create', 'PostsController@create'); //za kreiranje postova i to mora prvo jer ako je id onda i create prepoznaje kao id

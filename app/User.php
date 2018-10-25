@@ -19,6 +19,15 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+
+    const VALIDATION_RULES =
+    [
+        'name' => 'required',    
+        'email' => 'required | email',
+        'password' => 'required | min:10'
+    ];
+
+
     /**
      * The attributes that should be hidden for arrays.
      *
