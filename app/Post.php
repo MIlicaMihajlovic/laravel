@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User;
 use App\Comment; //i ovde moramo da ih povezemo
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,9 +10,8 @@ class Post extends Model
 {
     
 
-    protected $fillable = [
-        'title', 'body', 'published'
-    ];
+    protected $guarded = ['id'];
+    
 
     const VALIDATION_RULES =
     [
@@ -24,6 +24,11 @@ class Post extends Model
     {
         return Post::where('published', true)->get(); //hocemo da vratimo samo one postove koji su publishovani
         //on klasu post veze za tabelu post jer je pametan
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'author_id'); //dodajemo author id da bi znao preko koje kolone da poveze
     }
 
     public function comments()
