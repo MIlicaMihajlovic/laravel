@@ -17,7 +17,7 @@
             
                 {{$post->title}}
         </h2>
-        
+        <p>Written by: {{ $post->author->name }}</p>
         <p> {{ $post->body }} </p>
 
         @if(count($post->comments))

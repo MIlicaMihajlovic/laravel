@@ -26,7 +26,7 @@ class Post extends Model
         //on klasu post veze za tabelu post jer je pametan
     }
 
-    public function user()
+    public function author()
     {
         return $this->belongsTo(User::class, 'author_id'); //dodajemo author id da bi znao preko koje kolone da poveze
     }
