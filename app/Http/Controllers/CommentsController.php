@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CommentReceived; //kao i ovo
 use App\Post;
 use App\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;  //ovo smo dodatno usovali
 
 class CommentsController extends Controller
 {
@@ -23,6 +25,8 @@ class CommentsController extends Controller
             request()->all()
         ); 
 
+        Mail::to($post->author->email)->send(new CommentReceived($post)); //ovde smo prosledili post kad smo ga instancirali
+                                        //posle send sta saljemo instanca ono sto smo napravili
         return redirect("/posts/{$postId}"); //moraju biti dvostruki navodnici
     }
 

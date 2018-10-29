@@ -38,6 +38,6 @@ class User extends Authenticatable
 
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class, 'author_id'); //dodali smo author id da bi nam prepoznao jer bi ovako trazio user id
     }
 }

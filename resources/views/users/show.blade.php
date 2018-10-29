@@ -1,4 +1,3 @@
-
 @extends('layouts.master') 
 <!-- nasledjujemo master koji je u folderu layouts -->
 
@@ -16,7 +15,7 @@
    <h1>Posts</h1> 
    
     <ul>
-        @foreach($posts as $post)
+        @foreach($user->posts as $post)
         <li>
          <div class="blog-post">
             <h2 class="blog-post-title">
@@ -24,9 +23,7 @@
                     {{$post->title}}
                 </a>     
             </h2>
-            <!-- postavljanje rute za postove jednog autora -->
-            <p>Written by: <a href="/users/{{ $post->author_id }}"> 
-            {{ $post->author->name }} </a></p>
+            <p>Written by: {{ $post->author->name }}</p>
             <p> {{ $post->body }} </p>
 
          </div><!-- /.blog-post -->

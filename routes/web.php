@@ -49,3 +49,5 @@ Route::group(['prefix' => 'posts', 'middleware' => ['auth']], function (){   //g
     
 });
 
+Route::get('/users/{id}', 'UsersController@show'); ///ruta za jednog usera svi postovi
+
