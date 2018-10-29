@@ -10,7 +10,12 @@
 <body>
 
     <main role="main" class="container">
-
+     @if($flash = session('message'))
+        <div class="alert alert-success">
+            {{ $flash }}
+        </div>
+     @endif
+    <!-- pristupamo poruci preko kljuca u session-->
      @include('layouts.partials.header')
 
       <div class="row">
