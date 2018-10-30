@@ -18,6 +18,15 @@
                 {{$post->title}}
         </h2>
         <p>Written by: {{ $post->author->name }}</p>
+        <p>
+            <ul>
+            @foreach($post->tags as $tag)
+                <li>
+                    <a href="/posts/tags/{{$tag->name}}">{{ $tag->name }}</a>
+                </li>
+            @endforeach
+            </ul>
+        </p>
         <p> {{ $post->body }} </p>
 
         @if(count($post->comments))

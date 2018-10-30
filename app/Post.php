@@ -35,4 +35,9 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class); //jedan post ima vise komentara
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);    //u istom su namespace i onda se ne mora use Tag gore
+    }
 }
