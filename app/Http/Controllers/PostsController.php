@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Tag;
 
 class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::getPublishedPosts(); //selektujemo koji su cekirani postovi
-
+        $posts = Post::getPublishedPosts()->paginate(10); //selektujemo koji su cekirani postovi
+                                                        //dodali smo paginaciju
         return view('posts.index', ['posts' => $posts]); //vracamo view
     }
 
@@ -25,7 +26,8 @@ class PostsController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        $tags = Tag::all();  //dodaje tagove
+        return view('posts.create')->with('tags', $tags);
     }
 
     public function store()
@@ -38,14 +40,24 @@ class PostsController extends Controller
 
        // dd(auth()->user());
         
-        Post::create(
-            array_merge(                                //da bi kreirao post mora da spoji sve
-                request()->all(),
-                [
-                    'author_id' => auth()->user()->id
-                ]
-            )
-        );
+        // Post::create(
+        //     array_merge(                                //da bi kreirao post mora da spoji sve
+        //         request()->all(),
+        //         [
+        //             'author_id' => auth()->user()->id
+        //         ]
+        //     )
+        // );
+
+        $post = new Post;
+        $post->title = request('title');
+        $post->body = request('body');
+        $post->author_id = auth()->user()->id;
+        $post->published = true;
+
+        $post->save();
+
+        $post->tags()->attach(request('tags')); //da nakacimo tagove one koje smo selektovati i sad ih cuva u bazi
 
         return redirect('/posts');
        
