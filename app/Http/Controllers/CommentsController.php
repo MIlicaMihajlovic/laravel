@@ -13,6 +13,8 @@ class CommentsController extends Controller
     public function store($postId)
     {
         $post = Post::findOrFail($postId); //ako ne nadje post da izbaci gresku
+
+        
             
         //validacija pre kreiranja komentara
         
@@ -24,6 +26,8 @@ class CommentsController extends Controller
         $post->comments()->create( //sa zagradama mozemo da radimo CRUD kod commentsa
             request()->all()
         ); 
+
+        
 
         Mail::to($post->author->email)->send(new CommentReceived($post)); //ovde smo prosledili post kad smo ga instancirali
                                         //posle send sta saljemo instanca ono sto smo napravili

@@ -23,6 +23,7 @@ class CommentReceived extends Mailable
     public function __construct(Post $post) //kad smo ovde prosledili post moramo i u commentsController  pri instanciranju CommentReceived
     {
         $this->post = $post;
+        //dd($this->post);
     }
 
     /**

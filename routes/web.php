@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'PostsController@index');
+
 Route::get('/logout', 'LoginController@logout');
 
 Route::prefix('/login')->group(function(){
@@ -26,7 +26,7 @@ Route::prefix('/register')->group(function()
     Route::post('/', 'RegisterController@store'); //za osposobljavanje registracije
 });
 
-
+Route::get('/posts', 'PostsController@index');
 Route::group(['prefix' => 'posts', 'middleware' => ['auth']], function (){   //grupna funkcija kako ne bismo stalno pisali posts i skratili
     
     Route::get('/create', 'PostsController@create'); //za kreiranje postova i to mora prvo jer ako je id onda i create prepoznaje kao id
@@ -34,7 +34,7 @@ Route::group(['prefix' => 'posts', 'middleware' => ['auth']], function (){   //g
     
     Route::get('/{id}', 'PostsController@show'); //bitan je redosled 
 
-    Route::get('/', 'PostsController@index');
+    
 
     
     
